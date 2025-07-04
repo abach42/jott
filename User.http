@@ -3,10 +3,18 @@
 @sheme = http
 @domain = {{sheme}}://{{host}}:{{port}}
 
-### login
+### admin login
 # @name login
 GET {{domain}}/api/auth/login HTTP/1.1
-Authorization: Basic JD123 password
+Authorization: Basic ADM1 password
+
+@jwt = {{login.response.body.jwt}}
+@refreshToken = {{login.response.body.refreshToken}}
+
+### user login
+# @name login
+GET {{domain}}/api/auth/login HTTP/1.1
+Authorization: Basic USR1 password
 
 @jwt = {{login.response.body.jwt}}
 @refreshToken = {{login.response.body.refreshToken}}

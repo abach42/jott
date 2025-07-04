@@ -14,10 +14,10 @@ public class UserDetailsServiceConfig {
     public UserDetailsService userDetailsService(ApplicationUserService applicationUserService) {
         return customerUserId -> {
             ApplicationUser applicationUser =
-                    applicationUserService.retrieveUserByCustomerUserId(customerUserId);
+                    applicationUserService.retrieveUserByIdentifier(customerUserId);
             return User.withUsername(applicationUser.getUserName())
                 .password(applicationUser.getPassword())
-                .authorities("USER")
+                .authorities(applicationUser.getRoles().name())
                 .build();
         };
     }

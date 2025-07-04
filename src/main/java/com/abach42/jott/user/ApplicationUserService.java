@@ -11,8 +11,8 @@ public class ApplicationUserService {
         this.applicationUserRepository = applicationUserRepository;
     }
 
-    public ApplicationUser retrieveUserByCustomerUserId(String customerUserId) {
-        Optional<ApplicationUser> user = applicationUserRepository.findByCustomerUserId(customerUserId);
+    public ApplicationUser retrieveUserByIdentifier(String identifier) {
+        Optional<ApplicationUser> user = applicationUserRepository.findByIdentifier(identifier);
         return user.get(); //todo handle optional
     }
 }

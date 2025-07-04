@@ -3,12 +3,13 @@ CREATE EXTENSION pgcrypto;
 CREATE TABLE application_user (
     id BIGSERIAL PRIMARY KEY,
     user_name VARCHAR(255) NOT NULL,
-    customer_user_id VARCHAR(255) NOT NULL,
+    identifier VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL
+    email VARCHAR(255) NOT NULL,
+    roles smallint NOT NULL
 );
 
-INSERT INTO application_user (user_name, customer_user_id, password, email)
+INSERT INTO application_user (user_name, identifier, password, email, roles)
 VALUES 
-('john_doe', 'JD123', '{noop}password', 'john.doe@example.com'),
-('jane_smith', 'JS456', '{noop}password', 'jane.smith@example.com');
+('john_doe', 'ADM1', '{noop}password', 'john.doe@example.com', 0),
+('jane_smith', 'USR1', '{noop}password', 'jane.smith@example.com', 1);
