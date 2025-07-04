@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ApplicationUserService {
+
     ApplicationUserRepository applicationUserRepository;
 
     public ApplicationUserService(ApplicationUserRepository applicationUserRepository) {

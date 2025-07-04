@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationService {
+
     private final JwtTokenGenerator jwtTokenGenerator;
 
     private final RefreshTokenGenerator refreshTokenGenerator;
@@ -20,7 +21,7 @@ public class AuthenticationService {
 
     public TokenResponseDto createNewTokenPair(Authentication authentication) {
         String jwt = jwtTokenGenerator.generateToken(authentication);
-        String refreshToken =  refreshTokenGenerator.generateToken(authentication);
+        String refreshToken = refreshTokenGenerator.generateToken(authentication);
 
         return new TokenResponseDto(
                 jwt,

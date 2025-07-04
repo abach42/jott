@@ -19,6 +19,6 @@ public class RefreshTokenGenerator extends AbstractTokenGenerator {
 
     @Override
     int getExpirationMinutes() {
-       return 120;
+        return 120;
     }
 }

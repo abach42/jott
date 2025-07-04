@@ -12,10 +12,6 @@ public enum UserRole implements ConvertibleEnum<Byte> {
         this.value = (byte) value;
     }
 
-    public Byte getValue() {
-        return value;
-    }
-
     public static UserRole fromValue(byte value) {
         for (UserRole level : UserRole.values()) {
             if (level.value == value) {
@@ -23,5 +19,9 @@ public enum UserRole implements ConvertibleEnum<Byte> {
             }
         }
         throw new IllegalArgumentException("Invalid level value: " + value);
+    }
+
+    public Byte getValue() {
+        return value;
     }
 }

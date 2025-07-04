@@ -23,12 +23,14 @@ public abstract class AbstractTokenGenerator {
 
     protected Instant now;
 
-    public AbstractTokenGenerator(ApplicationUserService applicationUserService, JwtEncoder jwtEncoder) {
+    public AbstractTokenGenerator(ApplicationUserService applicationUserService,
+            JwtEncoder jwtEncoder) {
         this.applicationUserService = applicationUserService;
         this.jwtEncoder = jwtEncoder;
     }
 
     abstract TokenPurpose getAllowedAction();
+
     abstract int getExpirationMinutes();
 
     public String generateToken(Authentication authentication) {
@@ -42,15 +44,17 @@ public abstract class AbstractTokenGenerator {
                 .claim(CLAIM_AUTHORITIES, getRole(authentication))
                 .claim(CLAIM_ALLOWED, getAllowedAction())
                 .build();
-        
-        return this.jwtEncoder.encode(JwtEncoderParameters.from(JwsHeader.with(MAC_ALGORITHM).build(),
-                claims)).getTokenValue();
+
+        return this.jwtEncoder.encode(
+                JwtEncoderParameters.from(JwsHeader.with(MAC_ALGORITHM).build(),
+                        claims)).getTokenValue();
     }
 
     private String getRole(Authentication authentication) {
         // getting roles from database again, and override jwt
         // so that it can be actualized and not kept by
         // JWT -> refresh token -> JWT -> refresh token forever.
-        return applicationUserService.retrieveUserByIdentifier(authentication.getName()).getRole().name();
+        return applicationUserService.retrieveUserByIdentifier(authentication.getName()).getRole()
+                .name();
     }
 }

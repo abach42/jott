@@ -8,12 +8,14 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtGra
 
 @Configuration
 public class JwtClaimConfig {
-    public static final String AUTHORITY_PREFIX = "ROLE_" ;
+
+    public static final String AUTHORITY_PREFIX = "ROLE_";
 
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        grantedAuthoritiesConverter.setAuthoritiesClaimName(AbstractTokenGenerator.CLAIM_AUTHORITIES);
+        grantedAuthoritiesConverter.setAuthoritiesClaimName(
+                AbstractTokenGenerator.CLAIM_AUTHORITIES);
         grantedAuthoritiesConverter.setAuthorityPrefix(AUTHORITY_PREFIX);
 
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();

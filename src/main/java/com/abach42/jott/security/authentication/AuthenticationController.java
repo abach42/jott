@@ -20,55 +20,57 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/auth")
 public class AuthenticationController {
 
-  private final AuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
 
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
 
     @Operation(summary = "Authenticate to get authorization")
-  @ApiResponses({
-      @ApiResponse(
-          responseCode = "200", description = "Authenticated",
-          content = @Content,
-          headers =  @Header(
-              name = "Authorization",
-              required = true,
-              description = "Set email and password to Authorization header."
-          )
-      ),
-      @ApiResponse(
-          responseCode = "401",
-          description = "Unauthorized",
-          content =  @Content
-      )
-  })
-  @GetMapping("/login")
-  public ResponseEntity<TokenResponseDto> showAuthByBasicAuth(Authentication authentication) {
-    TokenResponseDto tokenResponseDto = authenticationService.createNewTokenPair(authentication);
-    return ResponseEntity.ok().body(tokenResponseDto);
-  }
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200", description = "Authenticated",
+                    content = @Content,
+                    headers = @Header(
+                            name = "Authorization",
+                            required = true,
+                            description = "Set email and password to Authorization header."
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Unauthorized",
+                    content = @Content
+            )
+    })
+    @GetMapping("/login")
+    public ResponseEntity<TokenResponseDto> showTokenByBasicAuth(Authentication authentication) {
+        TokenResponseDto tokenResponseDto = authenticationService.createNewTokenPair(
+                authentication);
+        return ResponseEntity.ok().body(tokenResponseDto);
+    }
 
-  @Operation(summary = "Send a refresh token, get a new jwt")
-  @ApiResponses({
-      @ApiResponse(
-          responseCode = "200", description = "Authenticated",
-          content = @Content,
-          headers =  @Header(
-              name = "Authorization",
-              required = true,
-              description = "Send a refresh token, get a new jwt."
-          )
-      ),
-      @ApiResponse(
-          responseCode = "401",
-          description = "Unauthorized",
-          content =  @Content
-      )
-  })
-  @GetMapping("/refresh-token")
-  public ResponseEntity<TokenResponseDto> showAuthByToken(Authentication authentication) {
-    TokenResponseDto tokenResponseDto = authenticationService.createNewTokenPair(authentication);
-    return ResponseEntity.ok().body(tokenResponseDto);
-  }
+    @Operation(summary = "Send a refresh token, get a new jwt")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200", description = "Authenticated",
+                    content = @Content,
+                    headers = @Header(
+                            name = "Authorization",
+                            required = true,
+                            description = "Send a refresh token, get a new jwt."
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "Unauthorized",
+                    content = @Content
+            )
+    })
+    @GetMapping("/refresh-token")
+    public ResponseEntity<TokenResponseDto> showTokenByToken(Authentication authentication) {
+        TokenResponseDto tokenResponseDto = authenticationService.createNewTokenPair(
+                authentication);
+        return ResponseEntity.ok().body(tokenResponseDto);
+    }
 }

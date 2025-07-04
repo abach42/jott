@@ -19,6 +19,6 @@ public class JwtTokenGenerator extends AbstractTokenGenerator {
 
     @Override
     public int getExpirationMinutes() {
-       return 15;
+        return 15;
     }
 }

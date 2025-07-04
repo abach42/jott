@@ -8,12 +8,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class DatabasePasswordConfiguration {
 
-  /**
-   * Prefixing {noop} or other in database password records
-   */
-  @Bean
-  PasswordEncoder bCryptPasswordEncoder() {
-    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-  }
+    /**
+     * Prefixing {noop} or other in database password records
+     */
+    @Bean
+    PasswordEncoder bCryptPasswordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 
 }

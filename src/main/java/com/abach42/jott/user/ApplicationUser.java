@@ -16,75 +16,76 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class ApplicationUser {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
 
-  @Size(max = 250)
-  @Column(length = 250)
-  private String userName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-  @Size(max = 250)
-  @Column(length = 250, unique = true)
-  private String identifier;
+    @Size(max = 250)
+    @Column(length = 250)
+    private String userName;
 
-  @Length(groups = OnCreate.class, min = 2, max = 255, message = "Password must be between 2 and 255 characters.")
-  @Null(groups = OnUpdate.class)
-  private String password;
+    @Size(max = 250)
+    @Column(length = 250, unique = true)
+    private String identifier;
 
-  @Size(max = 250)
-  @Column(length = 250, unique = true)
-  private String email;
+    @Length(groups = OnCreate.class, min = 2, max = 255, message = "Password must be between 2 and 255 characters.")
+    @Null(groups = OnUpdate.class)
+    private String password;
 
-  @NotNull
-  @Enumerated(EnumType.ORDINAL)
-  private UserRole role;
+    @Size(max = 250)
+    @Column(length = 250, unique = true)
+    private String email;
 
-  public long getId() {
-    return id;
-  }
+    @NotNull
+    @Enumerated(EnumType.ORDINAL)
+    private UserRole role;
 
-  public void setId(long id) {
-    this.id = id;
-  }
+    public long getId() {
+        return id;
+    }
 
-  public String getUserName() {
-    return userName;
-  }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
+    public String getUserName() {
+        return userName;
+    }
 
-  public String getIdentifier() {
-    return identifier;
-  }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-  public void setIdentifier(String identifier) {
-    this.identifier = identifier;
-  }
+    public String getIdentifier() {
+        return identifier;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public UserRole getRole() {
-    return role;
-  }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public void setRole(UserRole role) {
-    this.role = role;
-  }
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
 }

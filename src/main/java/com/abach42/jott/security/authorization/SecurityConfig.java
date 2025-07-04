@@ -43,14 +43,15 @@ public class SecurityConfig {
     SecurityFilterChain documentationResourceFilterChain(HttpSecurity http) throws Exception {
         http.cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/chart.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll());
+                        .requestMatchers("/chart.html", "/swagger-ui/**", "/v3/api-docs/**")
+                        .permitAll());
         return http.build();
     }
 
     @Bean
     public Function<TokenPurpose, WebExpressionAuthorizationManager> tokenAccess() {
         return tokenPurpose -> new WebExpressionAuthorizationManager(
-                "principal.claims['"+ AbstractTokenGenerator.CLAIM_ALLOWED +"'] == '"
+                "principal.claims['" + AbstractTokenGenerator.CLAIM_ALLOWED + "'] == '"
                         + tokenPurpose.name() + "'");
     }
 }
