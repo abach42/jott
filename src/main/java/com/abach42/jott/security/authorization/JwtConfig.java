@@ -2,11 +2,9 @@ package com.abach42.jott.security.authorization;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import java.util.Collections;
-
 import java.util.function.Function;
 import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
@@ -20,7 +18,6 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties(RsaKeyProperties.class)
 public class JwtConfig {
 
     public static final MacAlgorithm MAC_ALGORITHM = MacAlgorithm.HS256;

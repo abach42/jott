@@ -1,5 +1,6 @@
 package com.abach42.jott.security.authorization;
 
+import com.abach42.jott.security.token.AbstractTokenGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
@@ -11,7 +12,7 @@ public class JwtClaimConfig {
   @Bean
   public JwtAuthenticationConverter jwtAuthenticationConverter() {
     JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-    grantedAuthoritiesConverter.setAuthoritiesClaimName("authorities");
+    grantedAuthoritiesConverter.setAuthoritiesClaimName(AbstractTokenGenerator.CLAIM_AUTHORITIES);
     grantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
 
     JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();

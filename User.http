@@ -8,24 +8,34 @@
 GET {{domain}}/api/auth/login HTTP/1.1
 Authorization: Basic ADM1 password
 
-@jwt = {{login.response.body.jwt}}
-@refreshToken = {{login.response.body.refreshToken}}
+@jwt = {{login.response.body.access_token}}
+@refreshToken = {{login.response.body.refresh_token}}
 
 ### user login
 # @name login
 GET {{domain}}/api/auth/login HTTP/1.1
 Authorization: Basic USR1 password
 
-@jwt = {{login.response.body.jwt}}
-@refreshToken = {{login.response.body.refreshToken}}
+@jwt = {{login.response.body.access_token}}
+@refreshToken = {{login.response.body.refresh_token}}
+
+### fail: refresh-token instead of jwt
+GET {{domain}}/api/any/bar HTTP/1.1
+Authorization: Bearer {{refreshToken}}
+Accept: application/json
+
+### fail: refresh-token with jwt
+# @name login
+GET {{domain}}/api/auth/refresh-token HTTP/1.1
+Authorization: Bearer {{jwt}}
 
 ### refresh-token
 # @name login
 GET {{domain}}/api/auth/refresh-token HTTP/1.1
 Authorization: Bearer {{refreshToken}}
 
-@jwt = {{login.response.body.jwt}}
-@refreshToken = {{login.response.body.refreshToken}}
+@jwt = {{login.response.body.access_token}}
+@refreshToken = {{login.response.body.refresh_token}}
 
 ### temp bar
 GET {{domain}}/api/any/bar HTTP/1.1

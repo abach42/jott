@@ -1,4 +1,4 @@
-package com.abach42.jott.security.authentication;
+package com.abach42.jott.security.token;
 
 import static com.abach42.jott.security.authorization.JwtConfig.MAC_ALGORITHM;
 
@@ -13,15 +13,21 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 
 public abstract class AbstractTokenGenerator {
+
+    public static final String CLAIM_AUTHORITIES = "authorities";
+
+    public static final String CLAIM_ALLOWED = "allowed";
+
     private final JwtEncoder jwtEncoder;
-    protected Instant now; 
+
+    protected Instant now;
 
     public AbstractTokenGenerator(JwtEncoder jwtEncoder) {
         this.jwtEncoder = jwtEncoder;
     }
 
-    abstract String getAllowedAction();
-    abstract Long getExpirationMinutes();
+    abstract TokenPurpose getAllowedAction();
+    abstract int getExpirationMinutes();
 
     public String generateToken(Authentication authentication) {
         now = Instant.now();
@@ -34,8 +40,8 @@ public abstract class AbstractTokenGenerator {
                 .issuedAt(now)
                 .expiresAt(now.plus(getExpirationMinutes(), ChronoUnit.MINUTES))
                 .subject(authentication.getName())
-                .claim("authorities", authorities)
-                .claim("allowedAction", getAllowedAction())
+                .claim(CLAIM_AUTHORITIES, authorities)
+                .claim(CLAIM_ALLOWED, getAllowedAction())
                 .build();
         
         return this.jwtEncoder.encode(JwtEncoderParameters.from(JwsHeader.with(MAC_ALGORITHM).build(),

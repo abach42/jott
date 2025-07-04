@@ -1,5 +1,6 @@
 package com.abach42.jott.security.authorization;
 
+import com.abach42.jott.user.UserRole;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
@@ -15,7 +16,7 @@ public class MethodSecurityConfig {
     @Bean
     static RoleHierarchy roleHierarchy() {
         return RoleHierarchyImpl.withDefaultRolePrefix()
-                .role("ADMIN").implies("USER")
+                .role(UserRole.ADMIN.name()).implies(UserRole.USER.name())
                 .build();
     }
 
