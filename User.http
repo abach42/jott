@@ -37,12 +37,18 @@ Authorization: Bearer {{refreshToken}}
 @jwt = {{login.response.body.access_token}}
 @refreshToken = {{login.response.body.refresh_token}}
 
-### temp bar
+### temp bar Admin
+GET {{domain}}/api/any/boo HTTP/1.1
+Authorization: Bearer {{jwt}}
+Accept: application/json
+
+### temp bar Admin, User
 GET {{domain}}/api/any/bar HTTP/1.1
 Authorization: Bearer {{jwt}}
 Accept: application/json
 
-### temp baz
+
+### temp baz Admin, User
 GET {{domain}}/api/any/baz HTTP/1.1
 Authorization: Bearer {{jwt}}
 Accept: application/json

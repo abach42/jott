@@ -47,7 +47,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-
     @Bean
     public Function<TokenPurpose, WebExpressionAuthorizationManager> tokenAccess() {
         return tokenPurpose -> new WebExpressionAuthorizationManager(

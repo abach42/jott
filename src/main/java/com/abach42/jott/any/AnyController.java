@@ -23,4 +23,10 @@ public class AnyController {
     public ResponseEntity<String> baz() {
         return ResponseEntity.ok().body("{\"baz\": 43}");
     }
+
+    @GetMapping("/boo")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> onlyAdmin() {
+        return ResponseEntity.ok().body("{\"bar\": 44}");
+    }
 }
