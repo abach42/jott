@@ -3,11 +3,11 @@ package com.abach42.jott.user;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface ApplicationUserRepository extends JpaRepository<ApplicationUser, Long> {
 
-    Optional<User> findByUserName(String userName);
+    Optional<ApplicationUser> findByUserName(String userName);
 
-    Optional<User> findByCustomerUserId(String customerUserId);
+    Optional<ApplicationUser> findByCustomerUserId(String customerUserId);
 
-    Optional<User> findByEmail(String email);
+    Optional<ApplicationUser> findByEmail(String email);
 }

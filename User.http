@@ -1,0 +1,25 @@
+@host = localhost
+@port = 8080
+@sheme = http
+@domain = {{sheme}}://{{host}}:{{port}}
+
+### login
+# @name login
+GET {{domain}}/api/auth/login HTTP/1.1
+Authorization: Basic JD123 password
+
+@jwt = {{login.response.body.jwt}}
+@refreshToken = {{login.response.body.refreshToken}}
+
+### refresh-token
+# @name login
+GET {{domain}}/api/auth/refresh-token HTTP/1.1
+Authorization: Bearer {{refreshToken}}
+
+@jwt = {{login.response.body.jwt}}
+@refreshToken = {{login.response.body.refreshToken}}
+
+### temp bar
+GET {{domain}}/api/any/bar HTTP/1.1
+Authorization: Bearer {{jwt}}
+Accept: application/json

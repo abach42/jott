@@ -7,8 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "application_user")
-public class User {
+public class ApplicationUser {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;

@@ -1,0 +1,57 @@
+error:
+  include-message: always
+  include-binding-errors: always
+  include-stacktrace: on-param
+spring:
+  application:
+    name: jott
+    version: "@project.version@"
+  config:
+    activate:
+      on-profile: default
+  data:
+    rest:
+      base-path: /api
+  datasource:
+    url: jdbc:postgresql://localhost:25433/db
+    username: db
+    password: db
+    driverClassName: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        jdbc.batch_size: 200
+        order_inserts: true
+        ddl-auto: none
+        format_sql: true
+        highlight_sql: true
+  sql:
+    init:
+      platform: mysql
+  mvc:
+    log-request-details: true
+  codec:
+    log-request-details: true
+springdoc:
+  swagger-ui:
+    enabled: true
+    tryItOutEnabled: true
+    filter: false
+    syntaxHighlight.activated: true
+debug: true
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        orm.jdbc.bind: TRACE
+      springframework:
+        security: TRACE
+        web: TRACE
+    web: DEBUG
+com.abach42.jott:
+  security:
+    jwt:
+      # must be at least 256 bits,
+      # caution: never commit key in production, consider to use env var
+      token-secret: ks9lg8pubax3ctmw9aq4pz4vduxllqq4
