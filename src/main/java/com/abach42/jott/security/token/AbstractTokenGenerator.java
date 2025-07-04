@@ -1,9 +1,11 @@
 package com.abach42.jott.security.token;
 
+import static com.abach42.jott.security.authorization.JwtClaimConfig.AUTHORITY_PREFIX;
 import static com.abach42.jott.security.authorization.JwtConfig.MAC_ALGORITHM;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,8 +33,12 @@ public abstract class AbstractTokenGenerator {
 
     public String generateToken(Authentication authentication) {
         now = Instant.now();
+
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
+                //eliminating ROLE_ROLE_ROLE problem
+                .map(auth -> auth.startsWith(AUTHORITY_PREFIX) ? auth.substring(AUTHORITY_PREFIX.length()) : auth)
+                .distinct()
                 .collect(Collectors.joining(" "));
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
