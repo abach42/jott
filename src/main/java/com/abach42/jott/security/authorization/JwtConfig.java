@@ -39,12 +39,7 @@ public class JwtConfig {
     JwtDecoder jwtDecoder() {
         byte[] bytes = tokenSecret.getBytes();
         SecretKeySpec originalKey = new SecretKeySpec(bytes, 0, bytes.length, "RSA");
-        NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withSecretKey(originalKey).macAlgorithm(MAC_ALGORITHM).build();
 
-        MappedJwtClaimSetConverter converter = MappedJwtClaimSetConverter.withDefaults(
-                Collections.singletonMap("custom", custom -> "value"));
-        jwtDecoder.setClaimSetConverter(converter);
-
-        return jwtDecoder;
+        return NimbusJwtDecoder.withSecretKey(originalKey).macAlgorithm(MAC_ALGORITHM).build();
     }
 }
