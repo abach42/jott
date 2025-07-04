@@ -15,9 +15,9 @@ public class UserDetailsServiceConfig {
         return customerUserId -> {
             ApplicationUser applicationUser =
                     applicationUserService.retrieveUserByIdentifier(customerUserId);
-            return User.withUsername(applicationUser.getUserName())
+
+            return User.withUsername(applicationUser.getIdentifier())
                 .password(applicationUser.getPassword())
-                .authorities(applicationUser.getRole().name())
                 .build();
         };
     }

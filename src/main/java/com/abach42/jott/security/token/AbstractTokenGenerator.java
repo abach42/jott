@@ -1,14 +1,12 @@
 package com.abach42.jott.security.token;
 
-import static com.abach42.jott.security.authorization.JwtClaimConfig.AUTHORITY_PREFIX;
 import static com.abach42.jott.security.authorization.JwtConfig.MAC_ALGORITHM;
 
+import com.abach42.jott.user.ApplicationUserService;
+import com.abach42.jott.user.UserRole;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -20,11 +18,14 @@ public abstract class AbstractTokenGenerator {
 
     public static final String CLAIM_ALLOWED = "allowed";
 
+    public final ApplicationUserService applicationUserService;
+
     private final JwtEncoder jwtEncoder;
 
     protected Instant now;
 
-    public AbstractTokenGenerator(JwtEncoder jwtEncoder) {
+    public AbstractTokenGenerator(ApplicationUserService applicationUserService, JwtEncoder jwtEncoder) {
+        this.applicationUserService = applicationUserService;
         this.jwtEncoder = jwtEncoder;
     }
 
@@ -34,19 +35,15 @@ public abstract class AbstractTokenGenerator {
     public String generateToken(Authentication authentication) {
         now = Instant.now();
 
-        String authorities = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                //eliminating ROLE_ROLE_ROLE problem
-                .map(auth -> auth.startsWith(AUTHORITY_PREFIX) ? auth.substring(AUTHORITY_PREFIX.length()) : auth)
-                .distinct()
-                .collect(Collectors.joining(" "));
+        UserRole userRole =
+                applicationUserService.retrieveUserByIdentifier(authentication.getName()).getRole();
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("self")
                 .issuedAt(now)
                 .expiresAt(now.plus(getExpirationMinutes(), ChronoUnit.MINUTES))
                 .subject(authentication.getName())
-                .claim(CLAIM_AUTHORITIES, authorities)
+                .claim(CLAIM_AUTHORITIES, userRole.name())
                 .claim(CLAIM_ALLOWED, getAllowedAction())
                 .build();
         
