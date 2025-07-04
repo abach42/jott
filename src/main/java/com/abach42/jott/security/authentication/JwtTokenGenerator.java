@@ -1,4 +1,4 @@
-package com.abach42.jott.authentication;
+package com.abach42.jott.security.authentication;
 
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,4 @@
-package com.abach42.jott.security;
-
-import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
-import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
+package com.abach42.jott.security.authorization;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import java.util.Collections;

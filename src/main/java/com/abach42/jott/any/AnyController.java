@@ -14,7 +14,13 @@ public class AnyController {
 
     @GetMapping("/bar")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<String> actionForAdminAndUser() {
-        return ResponseEntity.ok().body("bar");
+    public ResponseEntity<String> bar() {
+        return ResponseEntity.ok().body("{\"bar\": 42}");
+    }
+
+    @GetMapping("/baz")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public ResponseEntity<String> baz() {
+        return ResponseEntity.ok().body("{\"baz\": 43}");
     }
 }

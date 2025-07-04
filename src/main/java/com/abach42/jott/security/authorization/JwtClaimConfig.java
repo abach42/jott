@@ -1,4 +1,4 @@
-package com.abach42.jott.security;
+package com.abach42.jott.security.authorization;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

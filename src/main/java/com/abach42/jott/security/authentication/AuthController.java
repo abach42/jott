@@ -1,4 +1,4 @@
-package com.abach42.jott.authentication;
+package com.abach42.jott.security.authentication;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

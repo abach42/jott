@@ -1,12 +1,12 @@
-package com.abach42.jott.config.convertion;
+package com.abach42.jott.user;
 
-import com.abach42.jott.user.UserRole;
+import com.abach42.jott.config.convertion.GenericEnumConverter;
 import jakarta.persistence.Converter;
 
 @Converter(autoApply = true)
-public class LevelConverter extends GenericEnumConverter<UserRole, Byte> {
+public class UserRoleConverter extends GenericEnumConverter<UserRole, Byte> {
 
-    public LevelConverter() {
+    public UserRoleConverter() {
         super(UserRole.class);
     }
     

@@ -13,6 +13,6 @@ public class ApplicationUserService {
 
     public ApplicationUser retrieveUserByIdentifier(String identifier) {
         Optional<ApplicationUser> user = applicationUserRepository.findByIdentifier(identifier);
-        return user.get(); //todo handle optional
+        return user.orElseThrow(UserNotFoundException::new);
     }
 }

@@ -31,3 +31,8 @@ Authorization: Bearer {{refreshToken}}
 GET {{domain}}/api/any/bar HTTP/1.1
 Authorization: Bearer {{jwt}}
 Accept: application/json
+
+### temp baz
+GET {{domain}}/api/any/baz HTTP/1.1
+Authorization: Bearer {{jwt}}
+Accept: application/json

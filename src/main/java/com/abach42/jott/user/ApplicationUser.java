@@ -38,7 +38,7 @@ public class ApplicationUser {
 
   @NotNull
   @Enumerated(EnumType.ORDINAL)
-  private UserRole roles;
+  private UserRole role;
 
   public long getId() {
     return id;
@@ -80,11 +80,11 @@ public class ApplicationUser {
     this.email = email;
   }
 
-  public UserRole getRoles() {
-    return roles;
+  public UserRole getRole() {
+    return role;
   }
 
-  public void setRoles(UserRole roles) {
-    this.roles = roles;
+  public void setRole(UserRole role) {
+    this.role = role;
   }
 }

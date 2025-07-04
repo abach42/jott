@@ -1,4 +1,4 @@
-package com.abach42.jott.security;
+package com.abach42.jott.security.authorization;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;

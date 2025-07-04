@@ -1,4 +1,4 @@
-package com.abach42.jott.security;
+package com.abach42.jott.security.authorization;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
-import static org.springframework.security.oauth2.core.authorization.OAuth2AuthorizationManagers.hasScope;
 
 @Configuration
 @EnableWebSecurity(debug = true)

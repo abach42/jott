@@ -1,6 +1,6 @@
-package com.abach42.jott.authentication;
+package com.abach42.jott.security.authentication;
 
-import static com.abach42.jott.security.JwtConfig.MAC_ALGORITHM;
+import static com.abach42.jott.security.authorization.JwtConfig.MAC_ALGORITHM;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

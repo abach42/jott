@@ -1,4 +1,4 @@
-package com.abach42.jott.security;
+package com.abach42.jott.security.authorization;
 
 import com.abach42.jott.user.ApplicationUser;
 import com.abach42.jott.user.ApplicationUserService;
@@ -17,7 +17,7 @@ public class UserDetailsServiceConfig {
                     applicationUserService.retrieveUserByIdentifier(customerUserId);
             return User.withUsername(applicationUser.getUserName())
                 .password(applicationUser.getPassword())
-                .authorities(applicationUser.getRoles().name())
+                .authorities(applicationUser.getRole().name())
                 .build();
         };
     }
