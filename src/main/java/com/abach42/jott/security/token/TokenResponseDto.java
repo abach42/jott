@@ -1,5 +1,8 @@
 package com.abach42.jott.security.token;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Represents the response containing authentication tokens.
  * <p>
@@ -30,6 +33,7 @@ package com.abach42.jott.security.token;
  * - An access token. - The type of the token. - The duration in seconds before the token expires. -
  * A refresh token.
  */
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public record TokenResponseDto(
         String access_token,
         TokenType token_type,
@@ -46,6 +50,7 @@ public record TokenResponseDto(
             this.type = type;
         }
 
+        @JsonValue
         public String getType() {
             return type;
         }
