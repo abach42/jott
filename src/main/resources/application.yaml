@@ -1,16 +1,9 @@
-server:
-  error:
-    include-message: always
-    include-binding-errors: always
-    include-stacktrace: on-param
-    include-exception: false
 spring:
+  profiles:
+    active: default
   application:
     name: jott
     version: "@project.version@"
-  config:
-    activate:
-      on-profile: default
   data:
     rest:
       base-path: /api
@@ -32,8 +25,6 @@ spring:
       platform: mysql
   mvc:
     log-request-details: true
-  codec:
-    log-request-details: true
 springdoc:
   swagger-ui:
     enabled: true
@@ -52,6 +43,7 @@ logging:
         web: TRACE
     web: DEBUG
 com.abach42.jott:
+  basePath: /api
   security:
     jwt:
       # must be at least 256 bits,
