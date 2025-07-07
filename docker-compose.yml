@@ -4,11 +4,24 @@ services:
     image: postgres:latest
     restart: always
     ports:
-      - 25433:5432
+      - 15433:5432
     environment:
       POSTGRES_USER: db
       POSTGRES_PASSWORD: db
       POSTGRES_DB: db
     volumes:
-      - ./src/main/resources/db/.data/:/var/lib/posgresql/data/
+      - ./src/main/resources/db/.data/:/var/lib/postgresql/data/
       - ./src/main/resources/db/create.sql:/docker-entrypoint-initdb.d/create.sql
+  jott:
+    build: .
+    image: abach42.jott:latest
+    container_name: superhero-server
+    restart: no
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/db
+      - SPRING_DATASOURCE_USERNAME=db
+      - SPRING_DATASOURCE_PASSWORD=db

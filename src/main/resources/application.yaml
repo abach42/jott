@@ -1,3 +1,5 @@
+server:
+  port: 8080
 spring:
   profiles:
     active: default
@@ -8,10 +10,16 @@ spring:
     rest:
       base-path: /api
   datasource:
-    url: jdbc:postgresql://localhost:25433/db
-    username: db
-    password: db
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:25433/db}
+    username: ${SPRING_DATASOURCE_USERNAME:db}
+    password: ${SPRING_DATASOURCE_PASSWORD:db}
     driverClassName: org.postgresql.Driver
+  docker:
+    compose:
+      file: src/main/resources/db/docker-compose.yml
+      lifecycle: start-and-stop
+      skip:
+        in-tests: true
   jpa:
     properties:
       hibernate:
@@ -28,10 +36,9 @@ spring:
 springdoc:
   swagger-ui:
     enabled: true
-    tryItOutEnabled: true
+    tryItOutEnabled: false
     filter: false
     syntaxHighlight.activated: true
-debug: true
 logging:
   level:
     org:
@@ -49,3 +56,4 @@ com.abach42.jott:
       # must be at least 256 bits,
       # caution: never commit key in production, consider to use env var
       token-secret: ks9lg8pubax3ctmw9aq4pz4vduxllqq4
+debug: false
