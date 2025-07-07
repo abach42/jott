@@ -6,10 +6,6 @@ import jakarta.persistence.Converter;
 @Converter(autoApply = true)
 public class UserRoleConverter extends GenericEnumConverter<UserRole, Byte> {
 
-    public UserRoleConverter() {
-        super(UserRole.class);
-    }
-
     @Override
     public UserRole convertToEntityAttribute(Byte dbData) {
         if (dbData == null) {

@@ -27,18 +27,8 @@ public class ExceptionHandlerAdvice {
         return httpStatus.value();
     }
 
-    private String getError(ErrorResponse exception) {
-        return Optional.ofNullable(
-                        HttpStatus.resolve(getStatusCodeNumber(exception.getStatusCode())))
-                .map(HttpStatus::getReasonPhrase).orElse("Unknown error");
-    }
-
     private String getError(HttpStatus httpStatus) {
         return httpStatus.getReasonPhrase();
-    }
-
-    private String getMessage(ErrorResponse exception) {
-        return exception.getBody().getDetail();
     }
 
     private String getPath(ServletWebRequest request) {

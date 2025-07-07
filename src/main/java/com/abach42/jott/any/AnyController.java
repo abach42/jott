@@ -1,8 +1,9 @@
 package com.abach42.jott.any;
 
+import com.abach42.jott.config.methodsecurity.IsAdmin;
+import com.abach42.jott.config.methodsecurity.IsUser;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,19 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class AnyController {
 
     @GetMapping("/bar")
-    @PreAuthorize("hasRole('USER')")
+    @IsUser
     public ResponseEntity<String> bar() {
         return ResponseEntity.ok().body("{\"bar\": 42}");
     }
 
     @GetMapping("/baz")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @IsUser
     public ResponseEntity<String> baz() {
         return ResponseEntity.ok().body("{\"baz\": 43}");
     }
 
     @GetMapping("/boo")
-    @PreAuthorize("hasRole('ADMIN')")
+    @IsAdmin
     public ResponseEntity<String> onlyAdmin() {
         return ResponseEntity.ok().body("{\"bar\": 44}");
     }

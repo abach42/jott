@@ -3,6 +3,7 @@ package com.abach42.jott.user;
 import com.abach42.jott.config.validation.OnCreate;
 import com.abach42.jott.config.validation.OnUpdate;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -38,15 +39,11 @@ public class ApplicationUser {
     private String email;
 
     @NotNull
-    @Enumerated(EnumType.ORDINAL)
+    @Convert(converter = UserRoleConverter.class)
     private UserRole role;
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getUserName() {
