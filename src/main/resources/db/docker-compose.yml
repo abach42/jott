@@ -1,14 +1,14 @@
 services:
-  postgres-db:
-    container_name: postgres-jott-db
+  jott-postgres-db:
+    container_name: jott-postgres-db
     image: postgres:latest
     restart: always
     ports:
-      - 25433:5432
+      - 35433:5432
     environment:
       POSTGRES_USER: db
       POSTGRES_PASSWORD: db
       POSTGRES_DB: db
     volumes:
-      - ./src/main/resources/db/.data/:/var/lib/posgresql/data/
-      - ./src/main/resources/db/create.sql:/docker-entrypoint-initdb.d/create.sql
+      - ./.data/:/var/lib/posgresql/data/
+      - ./create.sql:/docker-entrypoint-initdb.d/create.sql

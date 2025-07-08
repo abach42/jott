@@ -15,7 +15,7 @@ services:
   jott:
     build: .
     image: abach42.jott:latest
-    container_name: superhero-server
+    container_name: jott-server
     restart: no
     ports:
       - "8080:8080"
